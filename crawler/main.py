@@ -16,6 +16,7 @@ options.add_argument("disable-infobars")
 options.add_argument("--window-size=1920x1080")
 
 options.add_experimental_option("prefs", {
+    "download.default_directory": f"{os.path.sep.join(os.path.dirname(os.path.realpath(__file__)).split(os.path.sep)[:-1])}{os.sep}downloads",
     "download.prompt_for_download": False,
     "download.directory_upgrade": True,
     "safebrowsing.enabled": True,
@@ -55,7 +56,7 @@ for ticket in tickets:
     driver.find_element_by_css_selector("#select2-cotacoes-search-container").click()
     time.sleep(1)
     driver.find_element_by_css_selector("body > span > span > span.select2-search.select2-search--dropdown > input").send_keys(ticket)
-
+    time.sleep(1)
     results = driver.find_elements_by_css_selector("#select2-cotacoes-search-results > li")
     for result in results:
         if ticket in [x for x in result.text.split(" ")]:
